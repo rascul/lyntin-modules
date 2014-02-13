@@ -19,7 +19,7 @@ def handle_user_filter(args):
 	return send_command
 
 def load():
-	exported.hook_register("user_filter_hook", handle_user_filter, place=50)
+	exported.hook_register("user_filter_hook", handle_user_filter)
 
 def unload():
 	exported.hook_unregister("user_filter_hook", handle_user_filter)
