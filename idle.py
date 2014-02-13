@@ -16,7 +16,7 @@ def handle_timer(args):
 	
 	idle_ticks += 1
 	
-	if idle_ticks >= 200:
+	if idle_ticks >= 200 and str(exported.get_current_session()) != "session.Session common":
 		exported.write_message("You have been idle.", ses=exported.get_current_session())
 		
 		# send a carraige return, but with #raw instead of #cr so it doen't
