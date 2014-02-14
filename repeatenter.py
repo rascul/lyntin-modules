@@ -15,18 +15,19 @@ last_command = ""
 def handle_user_filter(args):
 	global last_command
 	
-	command = args['dataadj']
 	send_command = args['dataadj']
 	
-	if last_command:
-		if command == "#cr":
-			send_command = last_command
+	if not args['internal']:
+		if last_command:
+			if args['dataadj'] == "#cr":
+				send_command = last_command
+			else:
+				last_command = args['dataadj']
 		else:
-			last_command = command
-	else:
-		last_command = command
+			last_command = args['dataadj']
+		return send_command
 	
-	return send_command
+	return args['dataadj']
 
 def load():
 	exported.hook_register("user_filter_hook", handle_user_filter)
