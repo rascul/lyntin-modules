@@ -3,7 +3,7 @@ Keeps you from idling out on wotmud. Automagically resets idle counter
 ever time there's input from the user.
 """
 __author__ = "Ray Schulz"
-__version__ = "2.0"
+__version__ = "2.1"
 __date__ = "February 14, 2014"
 
 from lyntin import exported, session
@@ -41,12 +41,12 @@ def handle_to_mud(args):
 
 def load():
 	exported.hook_register("connect_hook", handle_connect)
-	exported.hook_register("disconnect_hook", handle_connect)
+	exported.hook_register("disconnect_hook", handle_disconnect)
 	exported.hook_register("timer_hook", handle_timer)
 	exported.hook_register("to_mud_hook", handle_to_mud)
 
 def unload():
 	exported.hook_unregister("connect_hook", handle_connect)
-	exported.hook_unregister("disconnect_hook", handle_connect)
+	exported.hook_unregister("disconnect_hook", handle_disconnect)
 	exported.hook_unregister("timer_hook", handle_timer)
 	exported.hook_unregister("to_mud_hook", handle_to_mud)
