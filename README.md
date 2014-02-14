@@ -9,3 +9,6 @@ my lyntin modules
 
 * repeatenter - enables the ability to repeat last command by hitting enter but
 beware you can't use #cr with this so use #raw instead
+
+* rooms - capture room name, description and exits and put them in variables
+$room_name, $room_desc and $room_exits
