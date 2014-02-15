@@ -3,8 +3,8 @@ Keeps you from idling out on wotmud. Automagically resets idle counter
 ever time there's input from the user.
 """
 __author__ = "Ray Schulz"
-__version__ = "2.1"
-__date__ = "February 14, 2014"
+__version__ = "2.2"
+__date__ = "February 15, 2014"
 
 from lyntin import exported, session
 
@@ -20,7 +20,8 @@ def handle_connect(args):
 def handle_disconnect(args):
 	# remove disconnected session from ticks dict
 	global ticks
-	del ticks[args['session']]
+	if args['session'] in ticks:
+		del ticks[args['session']]
 
 def handle_timer(args):
 	# tick tock
