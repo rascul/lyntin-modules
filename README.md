@@ -7,6 +7,8 @@ my lyntin modules
 
 * idle - will one day be an anti idle thing for wotmud
 
+* ifvar - #ifvar command to check for existence of a variable
+
 * lyntinuser.py - my (currently empty) lyntinuser module
 
 * repeatenter - enables the ability to repeat last command by hitting enter but
