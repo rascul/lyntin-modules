@@ -22,7 +22,6 @@ example:
 commands_dict = dict()
 
 def ifvar_cmd(session, args, input):
-	
 	if args['variable'] in session._vars.keys():
 		exported.lyntin_command(args['action'], 1, session)
 	elif args['elseaction']:
