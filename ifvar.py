@@ -14,7 +14,7 @@ Allows you to test for the existence of a variable set with #variable. If the
 variable exists than the action will be performed, otherwise the elseaction
 (if there is one) will be performed.
 
-example:
+examples:
   #ifvar {room_name} {#showme You are at: $room_name}
   #ifvar {leader} {#showme $leader is in charge} {#showme You're on your own}
 """
@@ -31,7 +31,9 @@ commands_dict["ifvar"] = (ifvar_cmd, "variable action elseaction=")
 
 def load():
 	modutils.load_commands(commands_dict)
-	exported.add_help("ifvar", ifvar_help)
+	exported.add_help("root.commands.ifvar", ifvar_help)
+	exported.remove_help("root.ifvar")
 
 def unload():
 	modutils.unload_commands(commands_dict.keys())
+	exported.remove_help("root.commands.ifvar")
