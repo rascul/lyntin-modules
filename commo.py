@@ -26,13 +26,19 @@ def handle_from_mud(args):
 	if not args['session'] in sessions:
 		return
 	
+	t = datetime.datetime.fromtimestamp(time.time()).strftime('%l:%M')
+	f = sessions[args['session']]
+	
 	m = re.match(r'^((o|\*) HP:\w+ MV:\w+ > |)((\033\[(31|33|36))m(.+) (narrates|chats|bellows|tells you|speaks from the \w+) \'(.+)\'\033\[0m)$', args['data'])
 	
 	if m:
-		t = datetime.datetime.fromtimestamp(time.time()).strftime('%l:%M')
-		f = sessions[args['session']]
 		f.write("[%s] %s\n" % (t, m.group(3)))
 		f.flush()
+	else:
+		m = re.match(r'^((o|\*) HP:\w+ MV:\w+ > |)(You (narrate|bellow|chat|tell .*) \'.+\')$', args['data'])
+		if m:
+			f.write("[%s] %s\n" % (t, m.group(3)))
+			f.flush()
 
 def commo_cmd(session, args, input):
 	if args['action'] == "add":
