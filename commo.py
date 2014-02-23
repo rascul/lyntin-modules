@@ -10,8 +10,6 @@ import datetime
 
 import re
 
-from termcolor import colored
-
 from lyntin import exported
 from lyntin.modules import modutils
 
@@ -28,20 +26,12 @@ def handle_from_mud(args):
 	if not args['session'] in sessions:
 		return
 	
-	m = re.match(r'^((o|\*) HP:\w+ MV:\w+ > |)\033\[(31|33|36)m(.+) (narrates|chats|bellows|tells you|speaks from the \w+) \'(.+)\'\033\[0m$', args['data'])
+	m = re.match(r'^((o|\*) HP:\w+ MV:\w+ > |)((\033\[(31|33|36))m(.+) (narrates|chats|bellows|tells you|speaks from the \w+) \'(.+)\'\033\[0m)$', args['data'])
 	
 	if m:
-		color = "white"
-		if m.group(3) == "33":
-			color = "yellow"
-		elif m.group(3) == "31":
-			color = "red"
-		elif m.group(3) == "36":
-			color = "cyan"
-		
 		t = datetime.datetime.fromtimestamp(time.time()).strftime('%l:%M')
 		f = sessions[args['session']]
-		f.write("[%s] " % t + colored("%s %s %s\n" % (m.group(4), m.group(5), m.group(6)), color))
+		f.write("[%s] %s\n" % (t, m.group(3)))
 		f.flush()
 
 def commo_cmd(session, args, input):
