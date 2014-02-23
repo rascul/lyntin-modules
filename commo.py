@@ -2,7 +2,7 @@
 comms logging stuff
 """
 __author__ = "Ray Schulz"
-__version__ = "0.1"
+__version__ = "1.0"
 __date__ = "February 21, 2014"
 
 import time
