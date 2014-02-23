@@ -56,7 +56,12 @@ def commo_cmd(session, args, input):
 		else:
 			exported.lyntin_command("#showme Session %s isn't monitored by comms logger" % session.getName(), True, session)
 	elif args['action'] == "":
-		exported.lyntin_command("#showme moo", True, session)
+		if len(sessions):
+			exported.lyntin_command("#showme Sessions monitored by comms logger:", True, session)
+			for s in sessions:
+				exported.lyntin_command("#showme %s" % s.getName(), True, session)
+		else:
+			exported.lyntin_command("#showme No sessions currently monitored by comms logger", True, session)
 
 commands_dict["commo"] = (commo_cmd, "action=")
 
