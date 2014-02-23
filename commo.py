@@ -19,10 +19,6 @@ commo_help = """
 commo
 """
 
-uncommo_help = """
-uncommo
-"""
-
 sessions = dict()
 commands_dict = dict()
 
@@ -72,7 +68,6 @@ def load():
 	exported.hook_register("from_mud_hook", handle_from_mud)
 	modutils.load_commands(commands_dict)
 	exported.add_help("commo.commo", commo_help)
-	exported.add_help("commo.uncommo", uncommo_help)
 
 def unload():
 	exported.hook_unregister("from_mud_hook", handle_from_mud)
