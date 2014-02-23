@@ -77,5 +77,4 @@ def load():
 def unload():
 	exported.hook_unregister("from_mud_hook", handle_from_mud)
 	modutils.unload_commands(commands_dict.keys())
-	exported.remove_help("commo.commo")
-	exported.remove_help("commo.uncommo")
+
