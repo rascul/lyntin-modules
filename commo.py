@@ -10,7 +10,7 @@ import datetime
 
 import re
 
-from lyntin import exported
+from lyntin import exported, config
 from lyntin.modules import modutils
 
 commo_help = """
@@ -21,7 +21,7 @@ By itself, listed monitored sessions.
 With either add or remove, will add or remove the current session to the
 list of monitored session.
 
-Log file will be called <sessionname>-comms in $PWD.
+Log file will be called <sessionname>-comms in your datadir.
 
 examples:
   #commo
@@ -55,7 +55,7 @@ def handle_from_mud(args):
 def commo_cmd(session, args, input):
 	if args['action'] == "add":
 		if not session in sessions:
-			f = open(session.getName() + '-comms', 'w')
+			f = open(config.options['datadir'] + session.getName() + '-comms', 'w')
 			sessions[session] = f
 			exported.lyntin_command("#showme Session %s now monitored by comms logger" % session.getName(), True, session)
 		else:
