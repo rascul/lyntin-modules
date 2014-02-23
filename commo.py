@@ -14,7 +14,19 @@ from lyntin import exported
 from lyntin.modules import modutils
 
 commo_help = """
-commo
+Controls the comms logger.
+
+By itself, listed monitored sessions.
+
+With either add or remove, will add or remove the current session to the
+list of monitored session.
+
+Log file will be called <sessionname>-comms in $PWD.
+
+examples:
+  #commo
+  #commo add
+  #commo remove  
 """
 
 sessions = dict()
@@ -68,9 +80,11 @@ commands_dict["commo"] = (commo_cmd, "action=")
 def load():
 	exported.hook_register("from_mud_hook", handle_from_mud)
 	modutils.load_commands(commands_dict)
-	exported.add_help("commo.commo", commo_help)
+	exported.add_help("root.commands.commo", commo_help)
+	exported.remove_help("root.commo")
 
 def unload():
 	exported.hook_unregister("from_mud_hook", handle_from_mud)
 	modutils.unload_commands(commands_dict.keys())
+	exported.remove_help("root.commands.commo")
 
