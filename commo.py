@@ -49,18 +49,24 @@ def handle_from_mud(args):
 		f.flush()
 
 def commo_cmd(session, args, input):
-	if not session in sessions:
-		f = open(session.getName() + '-comms', 'w')
-		sessions[session] = f
+	if args['action'] == "add":
+		if not session in sessions:
+			f = open(session.getName() + '-comms', 'w')
+			sessions[session] = f
+			exported.lyntin_command("#showme Session %s now monitored by comms logger" % session.getName(), True, session)
+		else:
+			exported.lyntin_command("#showme Session %s already monitored by comms logger" % session.getName(), True, session)
+	elif args['action'] == "remove":
+		if session in sessions:
+			sessions[session].close()
+			del sessions[session]
+			exported.lyntin_command("#showme Session %s no longer monitored by comms logger" % session.getName(), True, session)
+		else:
+			exported.lyntin_command("#showme Session %s isn't monitored by comms logger" % session.getName(), True, session)
+	elif args['action'] == "":
+		exported.lyntin_command("#showme moo", True, session)
 
-commands_dict["commo"] = (commo_cmd)
-
-def uncommo_cmd(session, args, input):
-	if session in sessions:
-		sessions[session].close()
-		sessions.remove(session)
-
-commands_dict["uncommo"] = (uncommo_cmd)
+commands_dict["commo"] = (commo_cmd, "action=")
 
 def load():
 	exported.hook_register("from_mud_hook", handle_from_mud)
