@@ -35,4 +35,3 @@ def load():
 
 def unload():
 	modutils.unload_commands(commands_dict.keys())
-	exported.remove_help("ifvar")
