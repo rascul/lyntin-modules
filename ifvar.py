@@ -3,7 +3,7 @@
 a variable exists in the current session
 """
 __author__ = "Ray Schulz"
-__version__ = "1.0"
+__version__ = "1.1"
 __date__ = "February 16, 2014"
 
 from lyntin import exported
